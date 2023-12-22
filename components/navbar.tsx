@@ -79,6 +79,7 @@ export const Navbar = () => {
                 href={item.href}
                 size="lg"
                 onPress={() => setIsMenuOpen(false)}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
               </Link>
