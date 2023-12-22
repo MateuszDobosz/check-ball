@@ -12,6 +12,5 @@ export async function addGameAction(data: TGameSchema) {
   await connectDB();
   const game = new Game(data);
   await game.save();
-  revalidatePath("/");
   redirect(`game/${game.id}`);
 }

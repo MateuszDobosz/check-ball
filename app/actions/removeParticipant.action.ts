@@ -32,7 +32,6 @@ export async function removeParticipant(
     );
     game.participants = participants;
     await game.save();
-    revalidatePath("/");
     revalidatePath(`game/${_id}`);
     return {
       removed: true,
