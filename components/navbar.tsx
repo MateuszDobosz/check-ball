@@ -78,7 +78,6 @@ export const Navbar = () => {
                 color="foreground"
                 href={item.href}
                 size="lg"
-                onPress={() => setIsMenuOpen(false)}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
