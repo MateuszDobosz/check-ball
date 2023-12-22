@@ -36,9 +36,9 @@ export async function singUpForGame(
       createdAt: new Date(),
       note,
     });
-    console.log(game);
     await game.save();
     revalidatePath(`game/${_id}`);
+    revalidatePath("/");
     const saveStatus = game.participants.length > game.quantity;
     return {
       savedToList: !saveStatus,
