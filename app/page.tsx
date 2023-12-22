@@ -1,51 +1,26 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code"
-import { button as buttonStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import GameCard from "@/components/gameCard";
+import { fetchGames } from "./actions/fetchGames.action";
 
-export default function Home() {
-	return (
-		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-			<div className="inline-block max-w-lg text-center justify-center">
-				<h1 className={title()}>Make&nbsp;</h1>
-				<h1 className={title({ color: "violet" })}>beautiful&nbsp;</h1>
-				<br />
-				<h1 className={title()}>
-					websites regardless of your design experience.
-				</h1>
-				<h2 className={subtitle({ class: "mt-4" })}>
-					Beautiful, fast and modern React UI library.
-				</h2>
-			</div>
+export default async function Home() {
+  const games = await fetchGames(3);
 
-			<div className="flex gap-3">
-				<Link
-					isExternal
-					href={siteConfig.links.docs}
-					className={buttonStyles({ color: "primary", radius: "full", variant: "shadow" })}
-				>
-					Documentation
-				</Link>
-				<Link
-					isExternal
-					className={buttonStyles({ variant: "bordered", radius: "full" })}
-					href={siteConfig.links.github}
-				>
-					<GithubIcon size={20} />
-					GitHub
-				</Link>
-			</div>
-
-			<div className="mt-8">
-				<Snippet hideSymbol hideCopyButton variant="flat">
-					<span>
-						Get started by editing <Code color="primary">app/page.tsx</Code>
-					</span>
-				</Snippet>
-			</div>
-		</section>
-	);
+  return (
+    <div>
+      <h1 className="text-4xl font-bold">Zapisz się na grę!</h1>
+      <p className="mt-4 mb-4"> Ostatnio dodane gry: </p>
+      <div>
+        {games.map((game) => (
+          <GameCard
+            key={game._id.toString()}
+            id={game._id.toString()}
+            time={`${game.date} - ${game.time}`}
+            place={game.place}
+            quantity={game.participants.length}
+            maxQuantity={game.quantity}
+            info={game.info}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
