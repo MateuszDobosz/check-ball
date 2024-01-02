@@ -8,6 +8,7 @@ import {
   Divider,
   Link,
   Chip,
+  Button,
 } from "@nextui-org/react";
 
 export interface IGameCardProps {
@@ -43,12 +44,17 @@ export default function GameCard({
         </CardBody>
         <Divider />
         {info && (
-          <CardBody>
-            <Chip>{info}</Chip>
-          </CardBody>
+          <>
+            <CardBody>
+              <Chip>{info}</Chip>
+            </CardBody>
+            <Divider />
+          </>
         )}
         <CardFooter>
-          <Link href={`/game/${id}`}>Zapisz się!</Link>
+          <Button href={`/game/${id}`} as={Link} showAnchorIcon size="sm">
+            Zapisz się!
+          </Button>
           {
             // TODO: time check
           }
